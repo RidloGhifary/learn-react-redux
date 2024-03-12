@@ -4,10 +4,16 @@ import "./App.css";
 
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { incremented, amountAdded } from "./features/counter/counter-slice";
+import { useFetchBreedsQuery } from "./features/dogs/dog-api-slice";
+import { useState } from "react";
 
 function App() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
+
+  const [numDogs, setNumDogs] = useState(10);
+
+  const { data = [], isFetching } = useFetchBreedsQuery(numDogs);
 
   const handleClick = () => {
     // TODO - INCREMENT
@@ -30,9 +36,41 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={handleClick}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+        <div>
+          <p>Picture of dogs</p>
+          <select
+            value={numDogs}
+            onChange={(e) => setNumDogs(Number(e.target.value))}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+
+        {/* FETCH DATA */}
+        <div>
+          Number of dogs fetched {data.length}
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Picture</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((breed) => (
+                <tr key={breed.id}>
+                  <td>{breed.name}</td>
+                  <td>
+                    <img src={breed.image.url} alt={breed.name} height={250} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
