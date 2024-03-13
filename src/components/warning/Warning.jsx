@@ -3,7 +3,7 @@ import "./warning.css";
 import { useSelector } from "react-redux";
 
 export default function Warning() {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.userInfo);
 
   return (
     <div className="warning">

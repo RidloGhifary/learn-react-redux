@@ -4,7 +4,7 @@ import "./navbar.css";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.userInfo);
 
   return (
     <div className="navbar">
