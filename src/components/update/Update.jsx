@@ -2,10 +2,14 @@ import React from "react";
 import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Update() {
   const [name, setName] = useState("ridlo");
   const [email, setEmail] = useState("");
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   return (
     <div className="update">
@@ -28,14 +32,18 @@ export default function Update() {
             </div>
             <div className="formItem">
               <label>Username</label>
-              <input className="formInput" type="text" placeholder="John" />
+              <input
+                className="formInput"
+                type="text"
+                placeholder={user.name}
+              />
             </div>
             <div className="formItem">
               <label>Email</label>
               <input
                 className="formInput"
                 type="text"
-                placeholder="john@gmail.com"
+                placeholder={user.email}
               />
             </div>
             <div className="formItem">
