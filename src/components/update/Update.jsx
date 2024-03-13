@@ -3,19 +3,21 @@ import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAcc } from "../../redux/userSlice";
-import { updateUser } from "../../redux/apiCall";
+import { deleteAcc, updateUserWithThunks } from "../../redux/userSlice";
+// TODO - UPDATE USER WITH FAKE API
+// import { updateUser } from "../../redux/apiCall";
 
 export default function Update() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const { userInfo, pending, error } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    updateUser({ name, email }, dispatch);
+    // TODO - UPDATE USER WITH THUNKS
+    dispatch(updateUserWithThunks({ name, email }));
   };
 
   const handleDeleteAcc = (e) => {
@@ -49,7 +51,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={userInfo.name}
+                placeholder={user.userInfo.name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -58,7 +60,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={userInfo.email}
+                placeholder={user.userInfo.email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -67,12 +69,12 @@ export default function Update() {
               <input className="formInput" type="password" />
             </div>
             <button
-              disabled={pending}
+              disabled={user.pending}
               className="updateButton"
               onClick={handleUpdate}>
-              {pending ? "Loading..." : "Update"}
+              {user.pending ? "Loading..." : "Update"}
             </button>
-            {error && (
+            {user.error && (
               <span style={{ color: "red" }}>Something went wrong</span>
             )}
           </form>
