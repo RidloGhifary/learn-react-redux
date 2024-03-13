@@ -3,13 +3,19 @@ import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { update } from "../../redux/userSlice";
 
 export default function Update() {
-  const [name, setName] = useState("ridlo");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    dispatch(update({ name, email }));
+  };
 
   return (
     <div className="update">
@@ -36,6 +42,7 @@ export default function Update() {
                 className="formInput"
                 type="text"
                 placeholder={user.name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="formItem">
@@ -44,13 +51,16 @@ export default function Update() {
                 className="formInput"
                 type="text"
                 placeholder={user.email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="formItem">
               <label>Password</label>
               <input className="formInput" type="password" />
             </div>
-            <button className="updateButton">Update</button>
+            <button className="updateButton" onClick={handleUpdate}>
+              Update
+            </button>
           </form>
         </div>
       </div>
