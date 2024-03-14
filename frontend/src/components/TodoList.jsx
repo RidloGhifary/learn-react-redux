@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import TodoItem from "./TodoItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getTodoAsync } from "../redux/todoSlice";
 
 const TodoList = () => {
+  const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
+
+  useEffect(() => {
+    dispatch(getTodoAsync());
+  }, [dispatch]);
 
   return (
     <ul className="list-group">

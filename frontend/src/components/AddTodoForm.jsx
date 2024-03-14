@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../redux/todoSlice";
+// eslint-disable-next-line no-unused-vars
+import { addTodo, addTodoAsync } from "../redux/todoSlice";
 
 const AddTodoForm = () => {
   const [value, setValue] = useState("");
@@ -8,7 +9,13 @@ const AddTodoForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(addTodo({ title: value }));
+
+    // TODO - addTodoWithRedux
+    // dispatch(addTodo({ title: value }));
+
+    // TODO - addTodoWithAsyncThunk
+    dispatch(addTodoAsync({ title: value }));
+
     setValue("");
   };
 

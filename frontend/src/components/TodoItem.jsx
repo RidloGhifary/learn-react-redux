@@ -1,16 +1,31 @@
 import { useDispatch } from "react-redux";
-import { deleteTodo, todoComplete } from "../redux/todoSlice";
+import {
+  // eslint-disable-next-line no-unused-vars
+  deleteTodo,
+  deleteTodoAsync,
+  editCompleteTodoAsync,
+  // eslint-disable-next-line no-unused-vars
+  todoComplete,
+} from "../redux/todoSlice";
 
 /* eslint-disable react/prop-types */
 const TodoItem = ({ id, title, completed }) => {
   const dispatch = useDispatch();
 
   const handleTodoComplete = () => {
-    dispatch(todoComplete({ id: id, completed: !completed }));
+    // TODO - editWithRedux
+    // dispatch(todoComplete({ id: id, completed: !completed }));
+
+    // TODO - editWithAsyncThunk
+    dispatch(editCompleteTodoAsync({ id: id, completed: !completed }));
   };
 
   const handleDelete = () => {
-    dispatch(deleteTodo({ id: id }));
+    // TODO - deleteWithRedux
+    // dispatch(deleteTodo({ id: id }));
+
+    // TODO - deleteWithAsyncThunk
+    dispatch(deleteTodoAsync({ id }));
   };
 
   return (
