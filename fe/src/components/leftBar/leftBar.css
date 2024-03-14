@@ -7,9 +7,3 @@
 .leftbarWrapper {
   padding: 20px;
 }
-
-@media only screen and (max-width: 940px) {
-  .leftbar {
-    flex: 1;
-  }
-}

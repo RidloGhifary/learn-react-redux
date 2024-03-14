@@ -1,6 +1,9 @@
 import "./signUp.css";
+import { useSelector } from "react-redux";
 
 export default function SignUp() {
+  const { userInfo } = useSelector((state) => state.user);
+
   return (
     <div className="update">
       <div className="updateWrapper">
@@ -19,11 +22,19 @@ export default function SignUp() {
             </div>
             <div className="formItem">
               <label>Username</label>
-              <input className="formInput" type="text" placeholder="John" />
+              <input
+                className="formInput"
+                type="text"
+                placeholder={userInfo.username}
+              />
             </div>
             <div className="formItem">
               <label>Email</label>
-              <input className="formInput" type="text" placeholder="John" />
+              <input
+                className="formInput"
+                type="text"
+                placeholder={userInfo.email}
+              />
             </div>
             <div className="formItem">
               <label>Password</label>
